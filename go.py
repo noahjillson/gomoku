@@ -7,7 +7,8 @@ class gomoku:
                 self.game_board.append(".")
 
     def hasWon(self, player):
-        for x in range(149):
+        # goes to row 10(rows start at 0 and go to 14) and column P(15) so no out of bounds errors occur
+        for x in range(165):
             if (self.game_board[x] ==
                     self.game_board[x + 15] ==
                     self.game_board[x + 15 * 2] ==
@@ -15,14 +16,23 @@ class gomoku:
                     self.game_board[x + 15 * 4] ==
                     player):
                 return True
+        # goes to row 14 column L(11)
+        for x in range(220):
             if (self.game_board[x] ==
                     self.game_board[x + 1] ==
                     self.game_board[x + 2] ==
                     self.game_board[x + 2] ==
                     self.game_board[x + 4] ==
-                    player) and () :
+                    player) and (doesNotCrossRows(x)):
                 return True
         return False
+
+    def doesNotCrossRows(self, x):
+        for a in range(1, 5):
+            if (x + a) % 15 == 0:
+                return False
+        return True
+
 
     def __str__(self):
         string = "    "
